@@ -1,6 +1,3 @@
-# Team13
-- John Pravin Arockiasamy (st180270)
-- Ayush Mittal (st176425)
 
 # How to run the code
 Steps to follow to run the projects:
@@ -19,6 +16,4 @@ NOTE: sometime error may occur due to the fault in folder creation, then manuall
 
 Caution: The path shown in the config files are dedicated to the creator's path. Do change them. 
 
-# Results
-Find the results here:
-https://github.tik.uni-stuttgart.de/iss/dl-lab-22w-team13/tree/master/documents/docs
+
