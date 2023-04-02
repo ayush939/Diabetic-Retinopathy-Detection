@@ -1,0 +1,47 @@
+# Architectures
+vgg_like.base_filters = 8
+vgg_like.n_blocks = 3
+vgg_like.dense_units = 32
+vgg_like.dropout_rate = 0.2
+
+full_model.input_channels = 3
+full_model.trainable_backbone = True
+full_model.trainable_head = True
+backbone.kernel_size = (3,3)
+backbone.resblocks = [1, 1, 1, 1]
+backbone.filter_size = 64
+
+Head.num_classes = 2
+Head.dense_units1 = 128
+Head.dense_units2 = 64
+Head.dropout_rate = 0.2
+
+
+new_model.kernel_size = (3,3)
+new_model.resblocks = [1, 1, 1, 1]
+new_model.filter_size = 64
+new_model.num_classes = 2
+new_model.dense_units1 = 64
+new_model.dense_units2 = 32
+new_model.dropout_rate = 0.7
+
+
+
+# Layers
+vgg_block.kernel_size = (3, 3)
+identityblock.kernel_size = (3,3) 
+convblock.kernelsize = (3,3)
+
+# Training
+Trainer.total_steps = 1e4
+Trainer.log_interval = 25
+Trainer.ckpt_interval = 1000
+Trainer.learning_rate = 0.01
+
+# Input pipeline
+load.name = 'idrid'
+load.data_dir = '/home/RUS_CIP/st176425/dl-lab-22w-team13/diabetic_retinopathy/IDRID_dataset'
+preprocess.img_height = 256
+preprocess.img_width = 256
+prepare.batch_size = 128
+prepare.caching = False

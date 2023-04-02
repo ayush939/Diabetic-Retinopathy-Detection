@@ -1,0 +1,55 @@
+# Input pipeline
+load.name = 'idrid'
+load.data_dir = "/home/RUS_CIP/st180270/datasets/"
+load.eyepacs_train_class0 = 6873
+load.eyepacs_val_class0 = 2056
+load.eyepacs_test_class0 = 8225
+load.idrid_oversample_on = True
+load.graham_preprocessing_on = True  #True -> Graham Preprocessing is happening, False -> Graham Preprocessing is not happening
+
+preprocess.img_height = 256
+preprocess.img_width = 256
+augment.data_aug_on = True #True -> Data Augmentation is on, False -> Data Augmentation is off
+prepare.batch_size = 16
+prepare.caching = False
+
+# Training
+Trainer.total_steps = 12000
+Trainer.log_interval = 1000
+Trainer.ckpt_interval = 1000
+Trainer.learning_rate = 0.0001
+Trainer.after_step_save = 2000
+
+#Evaluation
+evaluate.learning_rate = 0.0001
+#evaluate.run_paths = "/home/RUS_CIP/st180270/dl-lab-22w-team13/diabetic_retinopathy/latest_experiments/custom_model/vgg_like/run_2023-01-21T05-39-50-515861/ckpts/ckpt_@step-6000"
+evaluate.run_paths = "/home/RUS_CIP/st180270/dl-lab-22w-team13/diabetic_retinopathy/latest_experiments/custom_model/resnet_like/run_2023-01-20T17-16-25-604421/ckpts/ckpt_@step-7000" #GP =True
+#evaluate.run_paths = "/home/RUS_CIP/st180270/dl-lab-22w-team13/diabetic_retinopathy/latest_experiments/custom_model/resnet_like/run_2023-01-16T19-26-20-043894/ckpts/ckpt_@step-10000" #GP=False
+evaluate.inp_img_path = "/home/RUS_CIP/st180270/datasets/IDRID_dataset/images/test/preprocessed_IDRiD_102.jpg" #GP=True
+#evaluate.inp_img_path = "/home/RUS_CIP/st180270/datasets/IDRID_dataset/images/test/IDRiD_009.jpg" #GP=False
+
+#Grad_cam
+superimpose_gradcam.img_path = "/home/RUS_CIP/st180270/datasets/IDRID_dataset/images/test/IDRiD_102.jpg"
+
+# Architectures
+vgg_like.base_filters = 8
+vgg_like.n_blocks = 6
+vgg_like.dense_units = 32
+vgg_like.dropout_rate = 0.6
+vgg_like.input_shape = (256, 256, 3)
+vgg_like.n_classes = 1
+
+# Layers
+vgg_block.kernel_size = (3, 3)
+
+# Resnet Architectures
+resnet_like.input_shape = (256, 256,3)
+resnet_like.kernel_size = (3,3)
+resnet_like.resblocks = [1, 1, 1, 1]
+resnet_like.filter_size = 64
+resnet_like.num_classes = 1
+resnet_like.dense_units1 = 64
+resnet_like.dense_units2 = 32
+resnet_like.dropout_rates = 0.6
+
+

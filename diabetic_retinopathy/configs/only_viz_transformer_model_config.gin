@@ -1,0 +1,45 @@
+# Input pipeline
+load.name = 'idrid'
+load.data_dir = "/home/RUS_CIP/st180270/datasets/"
+load.eyepacs_train_class0 = 6873
+load.eyepacs_val_class0 = 2056
+load.eyepacs_test_class0 = 8225
+load.idrid_oversample_on = True
+load.graham_preprocessing_on = True #True -> Graham Preprocessing is happening, False -> Graham Preprocessing is not happening
+
+preprocess.img_height = 256
+preprocess.img_width = 256
+augment.data_aug_on = True #True -> Data Augmentation is on, False -> Data Augmentation is off
+prepare.batch_size = 16
+prepare.caching = False
+    
+# Training
+Trainer.total_steps = 150000
+Trainer.log_interval = 5000
+Trainer.ckpt_interval = 5000
+Trainer.learning_rate = 0.00001
+Trainer.after_step_save = 20000
+
+#Evaluation
+evaluate.learning_rate = 0.00001
+evaluate.run_paths = "/home/RUS_CIP/st180270/dl-lab-22w-team13/diabetic_retinopathy/latest_experiments/transformer_model/transformer_small_idrid/run_2023-02-05T18-48-21-977035/ckpts/ckpt_@step-90000"
+evaluate.inp_img_path = "/home/RUS_CIP/st180270/datasets/IDRID_dataset/images/test/preprocessed_IDRiD_001.jpg" #GP=True
+
+
+#Grad_cam
+transformer_superimpose_gradcam.img_path = "/home/RUS_CIP/st180270/datasets/IDRID_dataset/images/test/IDRiD_001.jpg"
+
+# Architectures - Transformers
+ViT_Classifier_Viz_Only.input_sh = (256, 256, 3)
+ViT_Classifier_Viz_Only.patch_size = 8
+ViT_Classifier_Viz_Only.no_of_patches = 1024
+# No_of_patches = (image_width/patch_size) * (image_height/patch_size)
+ViT_Classifier_Viz_Only.proj_dim = 128
+ViT_Classifier_Viz_Only.transformer_layers = 1
+ViT_Classifier_Viz_Only.no_of_heads = 3
+ViT_Classifier_Viz_Only.transformer_units = [256, 128]
+ViT_Classifier_Viz_Only.dropout_rate = 0.6
+ViT_Classifier_Viz_Only.head_input_shape = (None, 128) 
+ViT_Classifier_Viz_Only.mlp_head_units = [64]
+ViT_Classifier_Viz_Only.dropout_rate = 0.6
+ViT_Classifier_Viz_Only.no_of_classes = 1

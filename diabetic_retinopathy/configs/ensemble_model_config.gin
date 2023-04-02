@@ -1,0 +1,36 @@
+# Input pipeline
+load.name = 'idrid'
+load.data_dir = "/home/RUS_CIP/st180270/datasets/"
+load.eyepacs_train_class0 = 6873
+load.eyepacs_val_class0 = 2056
+load.eyepacs_test_class0 = 8225
+load.idrid_oversample_on = True
+load.graham_preprocessing_on = True #True -> Graham Preprocessing is happening, False -> Graham Preprocessing is not happening
+
+preprocess.img_height = 256
+preprocess.img_width = 256
+augment.data_aug_on = False #True -> Data Augmentation is on, False -> Data Augmentation is off
+prepare.batch_size = 16
+prepare.caching = False
+
+# Training
+Trainer.total_steps = 3000 
+Trainer.log_interval = 200
+Trainer.ckpt_interval = 200
+Trainer.learning_rate = 0.00001
+Trainer.after_step_save = 400
+
+#Evaluation
+evaluate.learning_rate = 0.0001
+evaluate.run_paths = "latest_experiments/ensemble_model/run_2023-01-16T11-28-34-701008/ckpts/ckpt_@step-2000"
+evaluate.inp_img_path = "/home/RUS_CIP/st180270/datasets/IDRID_dataset/images/test/IDRiD_006.jpg" 
+
+
+#Grad_cam
+superimpose_gradcam.img_path = "/home/RUS_CIP/st180270/datasets/IDRID_dataset/images/test/IDRiD_004.jpg"
+
+# Architectures
+standard_models.dropout_rate = 0.7 # 0.6 if Graham Preprocessing = True. 
+standard_models.input_shape = (256, 256, 3)
+standard_models.n_classes = 1
+ensemble_model.input_shape = (256, 256, 3)
